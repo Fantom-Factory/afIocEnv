@@ -1,67 +1,80 @@
 
 const class IocEnv {
 	private static const Log log	:= IocEnv#.pod.log
-	
-	const Str?	env
+
+	const Str	env
 	const Bool	isProd
 	const Bool	isTest
 	const Bool	isDev
 
 	private const Str[]	debug
-	
-	new make() {
+	private const Str?	overRIDE
+
+	new make(|This|? f := null) {
 		debug	:= [,]
-		env		:= (Str?) null
-
-		if (Env.cur.vars.containsKey("env")) {
-			env = Env.cur.vars["env"]
-			addDebug(debug, "environment variable", "env", env)
-		}
-
-		if (Env.cur.vars.containsKey("environment")) {
-			env = Env.cur.vars["environment"]
-			addDebug(debug, "environment variable", "environment", env)
-		}
-
-		if (Env.cur.args.contains("-env")) {
-			index := Env.cur.args.index("-env")
-			env    = Env.cur.args.getSafe(index + 1)
-			addDebug(debug, "cmd line argument", "-env", env)
-		}
-
-		if (Env.cur.args.contains("-environment")) {
-			index := Env.cur.args.index("-environment")
-			env    = Env.cur.args.getSafe(index + 1)
-			addDebug(debug, "cmd line argument", "-environment", env)
-		}
 		
-		// need to mess about with static ctors - wait for v1.0!
-//		if (oVeRrIdE != null) {
-//			env    = oVeRrIdE
-//			addDebug(debug, "manual", "override", env)
-//		}
+		f?.call(this)	// use to set override
+		this.env	= findEnv(debug, Env.cur.vars, Env.cur.args, overRIDE)
 		
-		if (env == null || env.isEmpty) {
-			env = "PRODUCTION"
-			debug.add("Environment has not been configured. Defaulting to 'PRODUCTION'")
-		}
-
-		this.env	= env
 		this.debug	= debug
 		this.isProd	= "production" .equalsIgnoreCase(env) || "prod".equalsIgnoreCase(env)
 		this.isTest	= "testing"    .equalsIgnoreCase(env) || "test".equalsIgnoreCase(env)
 		this.isDev	= "development".equalsIgnoreCase(env) || "dev" .equalsIgnoreCase(env)
 	}
-	
-	Void logDebug() {
+
+	static IocEnv fromStr(Str environment) {
+		IocEnv() { it.overRIDE = environment }
+	}
+
+	Void logToInfo() {
 		debug.each { log.info(it) }
 	}
-	
+
 	override Str toStr() {
-		(env == null) ? "IocEnv::PRODUCTION" : "IocEnv::${env}"
+		env
 	}
 	
-	private Void addDebug(Str[] debug, Str from, Str name, Str env) {
+	internal static Str findEnv(Str[] debug, Str:Str vars, Str[] args, Str?	overRIDE) {
+		env		:= (Str?) null
+		
+		if (vars.containsKey("env")) {
+			env = vars["env"]
+			addDebug(debug, "environment variable", "env", env)
+		}
+
+		if (vars.containsKey("environment")) {
+			env = vars["environment"]
+			addDebug(debug, "environment variable", "environment", env)
+		}
+
+		if (args.contains("-env")) {
+			index := args.index("-env")
+			env    = args.getSafe(index + 1)
+			addDebug(debug, "cmd line argument", "-env", env)
+		}
+
+		if (args.contains("-environment")) {
+			index := args.index("-environment")
+			env    = args.getSafe(index + 1)
+			addDebug(debug, "cmd line argument", "-environment", env)
+		}
+		
+		if (overRIDE != null) {
+			env    = overRIDE
+			addDebug(debug, "manual", "override", env)
+		}
+		
+		if (env == null || env.isEmpty) {
+			env = "PRODUCTION"
+			debug.add("Environment has not been configured. Defaulting to 'PRODUCTION'")
+		}
+		
+		return env
+	}
+	
+	private static Void addDebug(Str[] debug, Str from, Str name, Str? env) {
+		if (env == null)
+			return
 		// Setting from environment variable 'env' : dev
 		// Overriding from cmd line argument 'env' : TEST
 		msg := (debug.isEmpty ? "Setting" : "Overriding") + " from ${from} '${name}' : ${env}"

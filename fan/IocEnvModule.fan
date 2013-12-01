@@ -13,15 +13,15 @@ const class IocEnvModule {
 	@Contribute { serviceType=FactoryDefaults# }
 	internal static Void contributeApplicationDefaults(MappedConfig config, IocEnv iocEnv) {
 		config[IocEnvConfigIds.env]		= iocEnv.env
-		config[IocEnvConfigIds.inProd]	= iocEnv.isProd
-		config[IocEnvConfigIds.inTest]	= iocEnv.isTest
-		config[IocEnvConfigIds.inDev]	= iocEnv.isDev
+		config[IocEnvConfigIds.isProd]	= iocEnv.isProd
+		config[IocEnvConfigIds.isTest]	= iocEnv.isTest
+		config[IocEnvConfigIds.isDev]	= iocEnv.isDev
 	}
-	
+
 	@Contribute { serviceType=RegistryStartup# }
-	static Void contributeRegistryStartup(OrderedConfig conf, IocEnv iocEnv) {
+	internal static Void contributeRegistryStartup(OrderedConfig conf, IocEnv iocEnv) {
 		conf.add |->| {
-			iocEnv.logDebug
+			iocEnv.logToInfo
 		}
 	}
 }
