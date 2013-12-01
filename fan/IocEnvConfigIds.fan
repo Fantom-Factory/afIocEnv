@@ -3,9 +3,9 @@ const mixin IocEnvConfigIds {
 	
 	static const Str	env		:= "afIocEnv.env"
 
-	static const Str	inProd	:= "afIocEnv.isProd"
+	static const Str	isProd	:= "afIocEnv.isProd"
 
-	static const Str	inTest	:= "afIocEnv.isTest"
+	static const Str	isTest	:= "afIocEnv.isTest"
 
-	static const Str	inDev	:= "afIocEnv.isDev"
+	static const Str	isDev	:= "afIocEnv.isDev"
 }
