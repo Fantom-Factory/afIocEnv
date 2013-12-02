@@ -1,13 +1,159 @@
 Overview [#overview]
 ********************
-A library for tweaking applications to different environments
+'afIocEnv' is a library for determining the application environment: dev, test or prod.
+
+
+
+Install [#install]
+******************
+Download from [Status302]`http://repo.status302.com/browse/afIocEnv` and copy to '%FAN_HOME/lib/fan/' or install via [fanr]`http://fantom.org/doc/docFanr/Tool.html#install`:
+
+  $ fanr install -r http://repo.status302.com/fanr/ afIocEnv
+
+To use in a [Fantom]`http://fantom.org/` project, add a dependency to the 'build.fan':
+
+  depends = ["sys 1.0", ..., "afIocEnv 1+"]
 
 
 
 Quick Start [#quickStart]
 *************************
+**Example.fan**:
 pre>
-  Example here
+using afIoc
+using afIocConfig
+using afIocEnv
+
+class Example {
+    @Inject IocEnv iocEnv             // --> Inject IocEnv service
+
+    @Config { id="afIocEnv.isProd" }  // --> Inject Config values
+    @Inject Bool isProd
+
+    new make(|This| in) { in(this) }
+
+    Void wotever() {
+        echo("The environment is '${iocEnv.env}'")
+
+        if (isProd) {
+            echo("I'm in Production!")
+        } else {
+            echo("I'm in Development!!")
+        }
+    }
+}
+
+// ---- Standard afIoc Support Classes ----
+
+class Main {
+    Void main() {
+        registry := RegistryBuilder().addModules([AppModule#, IocEnvModule#, IocConfigModule#]).build.startup
+        example  := (Example) registry.dependencyByType(Example#)
+        example.wotever()
+    }
+}
+
+class AppModule {
+    static Void bind(ServiceBinder binder) {
+        binder.bindImpl(Example#)
+    }
+}
+<pre
+
+Run **Example.fan** from the command line:
+
+pre>
+$ fan Example.fan -env PRODUCTION
+[info] [afIocEnv] Setting from environment variable 'env' : development
+[info] [afIocEnv] Overriding from cmd line argument '-env' : PRODUCTION
+The environment is 'PRODUCTION'
+I'm in Production!
+<pre
+
+
+
+Usage - Service Injection [#serviceInjection]
+*********************************************
+The `IocEnv` class is the main [afIoc]`http://repo.status302.com/doc/afIoc/#overview` service with handy utility methods. Inject it as usual:
+
+pre>
+using afIoc::Inject
+using afIocEnv::IocEnv
+
+@Inject IocEnv iocEnv
+
+...
+
+Void wotever() {
+   if (iocEnv.isDev) {
+      ... // dev only stuff
+   }
+}
+<pre
+
+
+
+Usage - Config Injection [#configInjection]
+*******************************************
+You can also inject [afIocConfig]`http://repo.status302.com/browse/afIocConfig#overview` config values. See `IocEnvConfigIds` for a a complete list of injectable values:
+
+pre>
+using afIoc::Inject
+using afIocConfig::Config
+
+@Config { id="afIocEnv.isDev" }
+@Inject Bool isDev
+
+...
+
+Void wotever() {
+   if (isDev) {
+      ... // dev only stuff
+   }
+}
+<pre
+
+
+
+Setting the Environment [#settingTheEnvironment]
+************************************************
+To find the 'environment', afIocEnv checks the following:
+
+- **Environment Variables** - the value of any environment variable named 'env' or 'environment'
+
+- **Program Arguments** - if an option labelled '-env' or '-environment' if found, the environment is taken to be the argument
+  following. This convention follows [@Opt]`util::Opt` from `util::AbstractMain`.
+
+- **Manual** - The environment may be set when you create the `IocEnv` instance.
+
+The ordering means program arguments override environment variables and a manual set trumps everything.
+
+Note if no environment setting is found, it defaults to 'Production'. This is because it's usually easier to config dev and
+test boxes than it is production ones.
+
+> **ALIEN-AID:** Because the environment default is 'production' you need to set the environment on your dev machine. The
+> easiest way is to set a new environment variable called 'ENV' to the value 'dev'.
+
+
+
+Overriding the Environment [#overridingTheEnvironment]
+******************************************************
+Should you need to programmatically override the environment, do it by overriding the `IocEnv` service in your AppModule:
+
+pre>
+using afIoc
+using afIocEnv
+
+class AppModule {
+
+    @Contribute { serviceType=ServiceOverride# }
+    static Void contributeServiceOverride(MappedConfig config) {
+        config["IocEnv"] = IocEnv.fromStr("Testing")
+    }
+
+    ....
+
+}
 <pre
 
 
@@ -15,6 +161,6 @@ pre>
 Release Notes [#releaseNotes]
 *****************************
 
-v0.0.2 [#v0.0.2]
+v1.0.0 [#v1.0.0]
 ----------------
- - New: Preview Release
+ - New: Initial Release
