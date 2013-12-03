@@ -1,5 +1,5 @@
 
-** Config values as provided by afIocEnd.
+** Config values as provided by afIocEnv.
 const mixin IocEnvConfigIds {
 	
 	** Returns the environment Str.
