@@ -5,15 +5,19 @@ const mixin IocEnv {
 	** Returns the environment Str.
 	abstract Str	env()
 
-	** Returns 'true' if environment is 'prod', 'production' or *undefined*.
+	** Returns 'true' if the environment is 'prod', 'production' or *undefined*.
 	abstract Bool	isProd()
 
-	** Returns 'true' if environment is 'test' or 'testing'.
+	** Returns 'true' if the environment is 'test' or 'testing'.
 	abstract Bool	isTest()
 	
-	** Returns 'true' if environment is 'dev' or 'development'.
+	** Returns 'true' if the environment is 'dev' or 'development'.
 	abstract Bool	isDev()
+
+	** Returns 'true' if the environment matches the given 'env' in a case insensitive match.
+	abstract Bool	isEnv(Str env)
 	
+	** Logs environment to info.
 	abstract Void logToInfo()
 		
 	** Create an 'IocEnv' with the given environment. 
@@ -30,7 +34,7 @@ internal const class IocEnvImpl : IocEnv {
 	override const Bool	isTest
 	override const Bool	isDev
 
-	internal const Str[]	debug
+	internal const Str[] debug
 	internal const Str?	overRIDE
 
 	
@@ -44,6 +48,10 @@ internal const class IocEnvImpl : IocEnv {
 		this.isProd	= "production" .equalsIgnoreCase(env) || "prod".equalsIgnoreCase(env)
 		this.isTest	= "testing"    .equalsIgnoreCase(env) || "test".equalsIgnoreCase(env)
 		this.isDev	= "development".equalsIgnoreCase(env) || "dev" .equalsIgnoreCase(env)
+	}
+
+	override Bool isEnv(Str env) {
+		this.env.equalsIgnoreCase(env)
 	}
 
 	override Void logToInfo() {

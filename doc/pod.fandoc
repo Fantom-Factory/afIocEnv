@@ -2,6 +2,10 @@ Overview [#overview]
 ********************
 'afIocEnv' is a library for determining the application environment, be it dev, test or prod.
 
+> **ALIEN-AID:** See the [Fantom-Factory]`http://fantom-factory.blogspot.co.uk/` blog article
+[Dev, Test or Prod; What is Your Machine?]`http://fantom-factory.blogspot.co.uk/2013/12/dev-test-or-prod-what-is-your-machine.html`
+for a good introduction to 'afIocEnv'.
+
 
 
 Install [#install]
