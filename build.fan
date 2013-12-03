@@ -4,15 +4,15 @@ class Build : BuildPod {
 
 	new make() {
 		podName = "afIocEnv"
-		summary = "A library for tweaking applications to different environments"
-		version = Version([0,0,1])
+		summary = "A library for determining the application environment; dev, test or prod"
+		version = Version([1,0,0])
 
 		meta	= [	"org.name"		: "Alien-Factory",
 					"org.uri"		: "http://www.alienfactory.co.uk/",
 					"vcs.uri"		: "https://bitbucket.org/Alien-Factory/afiocenv",
 					"proj.name"		: "Ioc Env",
 					"license.name"	: "BSD 2-Clause License",	
-					"repo.private"	: "true"
+					"repo.private"	: "false"
 
 					,"afIoc.module"	: "afIocEnv::IocEnvModule"
 				]
