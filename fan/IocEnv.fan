@@ -1,5 +1,5 @@
 
-** (Service) - 
+** (Service) - Holds the 'environment' with some hand utility methods.
 const mixin IocEnv {
 	
 	** Returns the environment Str.

@@ -2,7 +2,7 @@ using afIoc
 using afIocConfig
 //using afIocEnv
 
-class Example {
+internal class Example {
 	@Inject IocEnv iocEnv
 
 	@Config { id="afIocEnv.isProd" }
@@ -21,7 +21,7 @@ class Example {
 	}
 }
 	
-class Main {
+internal class Main {
 	Void main() {
 		registry := RegistryBuilder().addModules([AppModule#, IocEnvModule#, IocConfigModule#]).build.startup
 		example  := (Example) registry.dependencyByType(Example#)
@@ -29,7 +29,7 @@ class Main {
 	}
 }
 
-class AppModule {
+internal class AppModule {
 	static Void bind(ServiceBinder binder) {
 		binder.bindImpl(Example#)
 	}		
