@@ -5,7 +5,7 @@ class Build : BuildPod {
 	new make() {
 		podName = "afIocEnv"
 		summary = "A library for determining the application environment; dev, test or prod"
-		version = Version([1,0,1])
+		version = Version("1.0.1")
 
 		meta	= [	"org.name"		: "Alien-Factory",
 					"org.uri"		: "http://www.alienfactory.co.uk/",
