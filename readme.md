@@ -6,11 +6,13 @@ Ioc Env is a [Fantom](http://fantom.org/) library for determining the applicatio
 
 ## Install
 
-Download from [status302](http://repo.status302.com/browse/afIocEnv) and copy to `%FAN_HOME/lib/fan/` or install via [fanr](http://fantom.org/doc/docFanr/Tool.html#install):
+Download from [status302](http://repo.status302.com/browse/afIocEnv) and copy to `%FAN_HOME/lib/fan/`.
+
+Or install via [fanr](http://fantom.org/doc/docFanr/Tool.html#install):
 
     $ fanr install -r http://repo.status302.com/fanr/ afIocEnv
 
-To use in a [Fantom](http://fantom.org/) project, add a dependency in your `build.fan`:
+To use in a [Fantom](http://fantom.org/) project, add a dependency to its `build.fan`:
 
     depends = ["sys 1.0", ..., "afIocEnv 0+"]
 
