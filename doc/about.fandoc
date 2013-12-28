@@ -1,4 +1,4 @@
-'afIocEnv' is a library for determining the application environment, be it *development*, *test* or *production*.
+'Ioc Env' is a library for determining the application environment, be it *development*, *test* or *production*.
 
 It sniffs environment variables and program arguments, and offers a manual override option - useful for testing.
 
