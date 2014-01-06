@@ -9,7 +9,7 @@ class Build : BuildPod {
 
 		meta	= [	"org.name"		: "Alien-Factory",
 					"org.uri"		: "http://www.alienfactory.co.uk/",
-					"vcs.uri"		: "https://bitbucket.org/Alien-Factory/afiocenv",
+					"vcs.uri"		: "https://bitbucket.org/AlienFactory/afiocenv",
 					"proj.name"		: "Ioc Env",
 					"license.name"	: "BSD 2-Clause License",	
 					"repo.private"	: "true"
