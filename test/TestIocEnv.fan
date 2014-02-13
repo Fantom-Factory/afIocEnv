@@ -55,7 +55,7 @@ internal class TestIocEnv : Test {
 internal class T_AppModule {
 
 	static Void bind(ServiceBinder binder) {
-		binder.bindImpl(IocEnv#)
+		binder.bind(IocEnv#)
 	}	
 
 	@Contribute { serviceType=ServiceOverride# }

@@ -7,7 +7,7 @@ using afIocConfig::FactoryDefaults
 const class IocEnvModule {
 
 	internal static Void bind(ServiceBinder binder) {
-		binder.bindImpl(IocEnv#)
+		binder.bind(IocEnv#)
 	}
 	
 	@Contribute { serviceType=FactoryDefaults# }
