@@ -31,6 +31,6 @@ internal class Main {
 
 internal class AppModule {
 	static Void bind(ServiceBinder binder) {
-		binder.bindImpl(Example#)
+		binder.bind(Example#)
 	}		
 }

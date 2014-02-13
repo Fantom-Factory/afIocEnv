@@ -19,6 +19,9 @@ const mixin IocEnv {
 	
 	** Logs environment to info.
 	abstract Void logToInfo()
+	
+	** Returns the environment in abbreviated form; 'dev, test, prod'. Or just the env in lowercase if not recognised.
+	abstract Str abbr()
 		
 	** Create an 'IocEnv' with the given environment. 
 	static IocEnv fromStr(Str environment) {
@@ -58,6 +61,13 @@ internal const class IocEnvImpl : IocEnv {
 		debug.each { log.info(it) }
 	}
 
+	override Str abbr() {
+		if (isProd)	return "prod"
+		if (isTest)	return "test"
+		if (isDev)	return "dev"
+		return env.lower
+	}
+	
 	override Str toStr() {
 		env
 	}
