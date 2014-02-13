@@ -67,7 +67,7 @@ internal const class IocEnvImpl : IocEnv {
 		if (isDev)	return "dev"
 		return env.lower
 	}
-	
+
 	override Str toStr() {
 		env
 	}
