@@ -2,17 +2,17 @@ Overview [#overview]
 ********************
 'Ioc Env' is a library for determining the application environment, be it dev, test or prod.
 
-> **ALIEN-AID:** See the [Fantom-Factory]`http://fantom-factory.blogspot.co.uk/` blog article
-[Dev, Test or Prod; What is Your Machine?]`http://fantom-factory.blogspot.co.uk/2013/12/dev-test-or-prod-what-is-your-machine.html`
-for a good introduction to 'afIocEnv'.
+> **ALIEN-AID:** See the [Fantom-Factory]`http://www.fantomfactory.org/` article
+[Dev, Test or Prod; What is Your Machine?]`http://www.fantomfactory.org/articles/dev-test-or-prod-what-is-your-machine#.U2LKiihfyJA`
+for a good introduction to 'Ioc Env'.
 
 
 
 Install [#install]
 ******************
-Install 'IocEnv' with the Fantom Respository Manager ( [fanr]`http://fantom.org/doc/docFanr/Tool.html#install` ):
+Install 'Ioc Env' with the Fantom Respository Manager ( [fanr]`http://fantom.org/doc/docFanr/Tool.html#install` ):
 
-  $ fanr install -r http://repo.status302.com/fanr/ afIocEnv
+  C:\> fanr install -r http://repo.status302.com/fanr/ afIocEnv
 
 Or to install manually, download the pod from [Status302]`http://repo.status302.com/browse/afIocEnv` and copy it to '%FAN_HOME%/lib/fan/'.
 
@@ -165,6 +165,10 @@ class AppModule {
 
 Release Notes [#releaseNotes]
 *****************************
+v1.0.4 [#v1.0.4]
+----------------
+ - Chg: Updated to use [IoC 1.6.0]`http://www.fantomfactory.org/pods/afIoc`
+
 v1.0.2 [#v1.0.2]
 ----------------
  - New: Added 'IocEnv.abbr()'

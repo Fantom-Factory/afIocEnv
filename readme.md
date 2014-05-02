@@ -6,15 +6,13 @@ Ioc Env is a [Fantom](http://fantom.org/) library for determining the applicatio
 
 ## Install
 
-Download from [status302](http://repo.status302.com/browse/afIocEnv) and copy to `%FAN_HOME/lib/fan/`.
+Install `Cold Feet` with the Fantom Respository Manager ( [fanr](http://fantom.org/doc/docFanr/Tool.html#install) ):
 
-Or install via [fanr](http://fantom.org/doc/docFanr/Tool.html#install):
+    C:\> fanr install -r http://repo.status302.com/fanr/ afIocEnv
 
-    $ fanr install -r http://repo.status302.com/fanr/ afIocEnv
+To use in a [Fantom](http://fantom.org/) project, add a dependency to `build.fan`:
 
-To use in a [Fantom](http://fantom.org/) project, add a dependency to its `build.fan`:
-
-    depends = ["sys 1.0", ..., "afIocEnv 0+"]
+    depends = ["sys 1.0", ..., "afIocEnv 1.0+"]
 
 
 
@@ -67,4 +65,4 @@ To use in a [Fantom](http://fantom.org/) project, add a dependency to its `build
 
 Full API & fandocs are available on the [status302 repository](http://repo.status302.com/doc/afIocEnv/#overview).
 
-Also see this [Fantom-Factory Blog Article](http://fantom-factory.blogspot.co.uk/2013/12/dev-test-or-prod-what-is-your-machine.html).
+Also see this [Fantom-Factory Blog Article](http://www.fantomfactory.org/articles/dev-test-or-prod-what-is-your-machine#.U2LKiihfyJA).
