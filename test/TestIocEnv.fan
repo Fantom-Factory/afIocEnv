@@ -58,8 +58,8 @@ internal class T_AppModule {
 		binder.bind(IocEnv#)
 	}	
 
-	@Contribute { serviceType=ServiceOverride# }
-	static Void contributeServiceOverride(MappedConfig config) {
+	@Contribute { serviceType=ServiceOverrides# }
+	static Void contributeServiceOverrides(MappedConfig config) {
 		config["IocEnv"] = IocEnv.fromStr("MoFo")
 	}
 }
