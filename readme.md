@@ -138,7 +138,7 @@ class AppModule {
 
     @Contribute { serviceType=ServiceOverrides# }
     static Void contributeServiceOverrides(MappedConfig config) {
-        config["IocEnv"] = IocEnv.fromStr("Testing")
+        config[IocEnv#] = IocEnv.fromStr("Testing")
     }
 
     ....
