@@ -20,7 +20,7 @@ const class IocEnvModule {
 
 	@Contribute { serviceType=RegistryStartup# }
 	internal static Void contributeRegistryStartup(OrderedConfig conf, IocEnv iocEnv) {
-		conf.add |->| {
+		conf.addOrdered("afIocEnv.logEnv") |->| {
 			iocEnv.logToInfo
 		}
 	}

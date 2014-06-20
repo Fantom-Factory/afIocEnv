@@ -156,7 +156,7 @@ class AppModule {
 
     @Contribute { serviceType=ServiceOverrides# }
     static Void contributeServiceOverrides(MappedConfig config) {
-        config["IocEnv"] = IocEnv.fromStr("Testing")
+        config[IocEnv#] = IocEnv.fromStr("Testing")
     }
 
     ....
@@ -169,7 +169,7 @@ Release Notes [#releaseNotes]
 *****************************
 v1.0.6 [#v1.0.6]
 ----------------
- - Chg: Updated to use [IoC 1.6.4]`pod:afIoc`
+ - Chg: Updated to use [IoC 1.6.4]`pod:afIoc` - removed dependencies on deprecated methods.
 
 v1.0.4 [#v1.0.4]
 ----------------
