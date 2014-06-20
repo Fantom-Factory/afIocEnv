@@ -4,6 +4,7 @@ using afIocConfig::FactoryDefaults
 ** The [afIoc]`http://repo.status302.com/doc/afIoc/#overview` module class.
 ** 
 ** This class is public so it may be referenced explicitly in test code.
+@NoDoc
 const class IocEnvModule {
 
 	internal static Void bind(ServiceBinder binder) {

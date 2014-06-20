@@ -11,7 +11,7 @@ class Build : BuildPod {
 			"proj.name"		: "IoC Env",
 			"afIoc.module"	: "afIocEnv::IocEnvModule",
 			"tags"			: "system",
-			"repo.private"	: "false",
+			"repo.private"	: "false"
 		]
 
 		index = [	
