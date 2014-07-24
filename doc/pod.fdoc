@@ -155,7 +155,7 @@ using afIocEnv
 class AppModule {
 
     @Contribute { serviceType=ServiceOverrides# }
-    static Void contributeServiceOverrides(MappedConfig config) {
+    static Void contributeServiceOverrides(Configuration config) {
         config[IocEnv#] = IocEnv.fromStr("Testing")
     }
 
@@ -167,6 +167,10 @@ class AppModule {
 
 Release Notes [#releaseNotes]
 *****************************
+v1.0.8 [#v1.0.8]
+----------------
+ - Chg: Updated to use [IoC 1.7.0]`pod:afIoc`.
+
 v1.0.6 [#v1.0.6]
 ----------------
  - Chg: Updated to use [IoC 1.6.4]`pod:afIoc` - removed dependencies on deprecated methods.

@@ -59,7 +59,7 @@ internal class T_AppModule {
 	}	
 
 	@Contribute { serviceType=ServiceOverrides# }
-	static Void contributeServiceOverrides(MappedConfig config) {
-		config["IocEnv"] = IocEnv.fromStr("MoFo")
+	static Void contributeServiceOverrides(Configuration config) {
+		config[IocEnv#] = IocEnv.fromStr("MoFo")
 	}
 }
