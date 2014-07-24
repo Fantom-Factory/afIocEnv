@@ -137,7 +137,7 @@ using afIocEnv
 class AppModule {
 
     @Contribute { serviceType=ServiceOverrides# }
-    static Void contributeServiceOverrides(MappedConfig config) {
+    static Void contributeServiceOverrides(Configuration config) {
         config[IocEnv#] = IocEnv.fromStr("Testing")
     }
 
