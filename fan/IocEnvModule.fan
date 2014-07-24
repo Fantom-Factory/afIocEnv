@@ -12,7 +12,7 @@ const class IocEnvModule {
 	}
 	
 	@Contribute { serviceType=FactoryDefaults# }
-	internal static Void contributeApplicationDefaults(MappedConfig config, IocEnv iocEnv) {
+	internal static Void contributeApplicationDefaults(Configuration config, IocEnv iocEnv) {
 		config[IocEnvConfigIds.env]		= iocEnv.env
 		config[IocEnvConfigIds.isProd]	= iocEnv.isProd
 		config[IocEnvConfigIds.isTest]	= iocEnv.isTest
@@ -20,8 +20,8 @@ const class IocEnvModule {
 	}
 
 	@Contribute { serviceType=RegistryStartup# }
-	internal static Void contributeRegistryStartup(OrderedConfig conf, IocEnv iocEnv) {
-		conf.addOrdered("afIocEnv.logEnv") |->| {
+	internal static Void contributeRegistryStartup(Configuration conf, IocEnv iocEnv) {
+		conf["afIocEnv.logEnv"] = |->| {
 			iocEnv.logToInfo
 		}
 	}
