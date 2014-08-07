@@ -21,8 +21,8 @@ class Build : BuildPod {
 		depends = [
 			"sys 1.0", 
 
-			"afIoc 1.7.2+", 
-			"afIocConfig 1.0.12+"
+			"afIoc 1.7.6+", 
+			"afIocConfig 1.0.14+"
 		]
 
 		srcDirs = [`test/`, `fan/`]
