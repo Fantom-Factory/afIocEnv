@@ -5,7 +5,7 @@ class Build : BuildPod {
 	new make() {
 		podName = "afIocEnv"
 		summary = "A library for determining the application environment; dev, test or prod"
-		version = Version("1.0.13")
+		version = Version("1.0.14")
 
 		meta = [
 			"proj.name"		: "IoC Env",
@@ -21,8 +21,8 @@ class Build : BuildPod {
 		depends = [
 			"sys 1.0", 
 
-			"afIoc 1.7.6+", 
-			"afIocConfig 1.0.14+"
+			"afIoc 2.0.0+", 
+			"afIocConfig 1.0.16+"
 		]
 
 		srcDirs = [`test/`, `fan/`]

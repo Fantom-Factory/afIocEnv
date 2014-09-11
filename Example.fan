@@ -1,12 +1,13 @@
 using afIoc
 using afIocConfig
-//using afIocEnv
+using afIocEnv
 
 internal class Example {
-	@Inject IocEnv iocEnv
+	@Inject
+	IocEnv iocEnv
 
 	@Config { id="afIocEnv.isProd" }
-	@Inject Bool isProd
+	Bool isProd
 
 	new make(|This| in) { in(this) }
 	
@@ -23,14 +24,14 @@ internal class Example {
 	
 internal class Main {
 	Void main() {
-		registry := RegistryBuilder().addModules([AppModule#, IocEnvModule#, IocConfigModule#]).build.startup
+		registry := RegistryBuilder().addModulesFromPod(Pod.find("afIocEnv")).addModule(AppModule#).build.startup
 		example  := (Example) registry.dependencyByType(Example#)
 		example.go()
 	}
 }
 
 internal class AppModule {
-	static Void bind(ServiceBinder binder) {
-		binder.bind(Example#)
+	static Void defineServices(ServiceDefinitions defs) {
+		defs.add(Example#)
 	}		
 }

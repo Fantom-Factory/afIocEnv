@@ -3,19 +3,19 @@
 const mixin IocEnv {
 	
 	** Returns the environment Str.
-	abstract Str	env()
+	abstract Str env()
 
 	** Returns 'true' if the environment is 'prod', 'production' or *undefined*.
-	abstract Bool	isProd()
+	abstract Bool isProd()
 
 	** Returns 'true' if the environment is 'test' or 'testing'.
-	abstract Bool	isTest()
+	abstract Bool isTest()
 	
 	** Returns 'true' if the environment is 'dev' or 'development'.
-	abstract Bool	isDev()
+	abstract Bool isDev()
 
 	** Returns 'true' if the environment matches the given 'env' in a case insensitive match.
-	abstract Bool	isEnv(Str env)
+	abstract Bool isEnv(Str env)
 	
 	** Logs environment to info.
 	abstract Void logToInfo()
@@ -37,11 +37,11 @@ internal const class IocEnvImpl : IocEnv {
 	override const Bool	isTest
 	override const Bool	isDev
 
-	internal const Str[] debug
-	internal const Str?	overRIDE
+			const Str[] debug
+			const Str?	overRIDE
 
 	
-	internal new make(|This|? f := null) {
+	new make(|This|? f := null) {
 		debug	:= [,]
 		
 		f?.call(this)	// use to set override
@@ -72,7 +72,7 @@ internal const class IocEnvImpl : IocEnv {
 		env
 	}
 	
-	internal static Str findEnv(Str[] debug, Str:Str vars, Str[] args, Str?	overRIDE) {
+	static Str findEnv(Str[] debug, Str:Str vars, Str[] args, Str?	overRIDE) {
 		env		:= (Str?) null
 		
 		if (vars.containsKey("env")) {
