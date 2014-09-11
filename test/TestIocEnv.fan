@@ -54,12 +54,12 @@ internal class TestIocEnv : Test {
 
 internal class T_AppModule {
 
-	static Void bind(ServiceBinder binder) {
-		binder.bind(IocEnv#)
+	static Void defineServices(ServiceDefinitions defs) {
+		defs.add(IocEnv#)
 	}	
 
-	@Contribute { serviceType=ServiceOverrides# }
-	static Void contributeServiceOverrides(Configuration config) {
-		config[IocEnv#] = IocEnv.fromStr("MoFo")
+	@Override
+	static IocEnv overrideIocEnv() {
+		IocEnv.fromStr("MoFo")
 	}
 }
