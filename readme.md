@@ -28,10 +28,11 @@ using afIocConfig
 using afIocEnv
 
 class Example {
-    @Inject IocEnv iocEnv             // --> Inject IocEnv service
+    @Inject
+    IocEnv iocEnv                     // --> Inject IocEnv service
 
     @Config { id="afIocEnv.isProd" }  // --> Inject Config values
-    @Inject Bool isProd
+    Bool isProd
 
     new make(|This| in) { in(this) }
 
@@ -46,19 +47,19 @@ class Example {
     }
 }
 
-// ---- Standard afIoc Support Classes ----
+// ---- Standard IoC Support Classes ----
 
 class Main {
     Void main() {
-        registry := RegistryBuilder().addModules([AppModule#, IocEnvModule#, IocConfigModule#]).build.startup
+        registry := RegistryBuilder().addModulesFromPod(Pod.find("afIocEnv")).addModule(AppModule#).build.startup
         example  := (Example) registry.dependencyByType(Example#)
         example.wotever()
     }
 }
 
 class AppModule {
-    static Void bind(ServiceBinder binder) {
-        binder.bindImpl(Example#)
+    static Void defineServices(ServiceDefinitions defs) {
+        defs.add(Example#)
     }
 }
 ```
@@ -94,14 +95,14 @@ Void wotever() {
 
 ## Usage - Config Injection 
 
-You can also inject [IoC Config](http://www.fantomfactory.org/pods/afIocConfig) values. See [IocEnvConfigIds](http://repo.status302.com/doc/afIocEnv/IocEnvConfigIds.html) for a a complete list of injectable values:
+You can also inject [IoC Config](http://www.fantomfactory.org/pods/afIocConfig) values. See [IocEnvConfigIds](http://repo.status302.com/doc/afIocEnv/IocEnvConfigIds.html) for a complete list of injectable values:
 
 ```
 using afIoc::Inject
 using afIocConfig::Config
 
 @Config { id="afIocEnv.isDev" }
-@Inject Bool isDev
+Bool isDev
 
 ...
 
@@ -114,7 +115,7 @@ Void wotever() {
 
 ## Setting the Environment 
 
-To determine your environment, `afIocEnv` checks the following:
+To determine your environment, `IoC Env` checks the following:
 
 - **Environment Variables** - if an environment variable named `env` or `environment` if found, it is taken to be your environment.
 - **Program Arguments** - if an option labelled `-env` or `-environment` if found, the environment is taken to be the argument following. Example, `-env prod`. This convention follows [@Opt](http://fantom.org/doc/util/Opt.html) from [util::AbstractMain](http://fantom.org/doc/util/AbstractMain.html).
@@ -128,7 +129,7 @@ Note if no environment setting is found, it defaults to `Production`. This is be
 
 ## Overriding the Environment 
 
-Should you need to programmatically override the environment, do it by overriding the [IocEnv](http://repo.status302.com/doc/afIocEnv/IocEnv.html) service in your AppModule:
+Should you need to programmatically override the environment, do it by overriding the [IocEnv](http://repo.status302.com/doc/afIocEnv/IocEnv.html) service in your `AppModule`:
 
 ```
 using afIoc
@@ -136,11 +137,10 @@ using afIocEnv
 
 class AppModule {
 
-    @Contribute { serviceType=ServiceOverrides# }
-    static Void contributeServiceOverrides(Configuration config) {
-        config[IocEnv#] = IocEnv.fromStr("Testing")
+    @Override
+    static IocEnv overrideIocEnv() {
+        IocEnv.fromStr("MoFo")
     }
-
     ....
 }
 ```
