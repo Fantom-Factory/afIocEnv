@@ -23,8 +23,8 @@ const mixin IocEnv {
 	** Returns the environment in abbreviated form; 'dev, test, prod'. Or just the env in lowercase if not recognised.
 	abstract Str abbr()
 		
-	** Create an 'IocEnv' with the given environment. 
-	static IocEnv fromStr(Str environment) {
+	** Create an 'IocEnv' with the given (optional) environment override.  
+	static IocEnv fromStr(Str? environment := null) {
 		IocEnvImpl() { it.overRIDE = environment }
 	}
 }
