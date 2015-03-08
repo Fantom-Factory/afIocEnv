@@ -53,13 +53,8 @@ internal class TestIocEnv : Test {
 }
 
 internal class T_AppModule {
-
 	static Void defineServices(ServiceDefinitions defs) {
 		defs.add(IocEnv#)
-	}	
-
-	@Override
-	static IocEnv overrideIocEnv() {
-		IocEnv.fromStr("MoFo")
+		defs.overrideById(IocEnv#.qname).withCtorArgs(["MoFo"])
 	}
 }

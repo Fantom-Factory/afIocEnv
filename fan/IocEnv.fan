@@ -1,5 +1,14 @@
 
 ** (Service) - Holds the 'environment' with some hand utility methods.
+** 
+** Although a 'mixin', implementations may still be made with the following code:
+** 
+**   iocEnv := IocEnv()
+** 
+** Or pass in an override with: 
+** 
+**   iocEnv := IocEnv("prod")
+** 
 const mixin IocEnv {
 	
 	** Returns the environment Str.
@@ -23,9 +32,11 @@ const mixin IocEnv {
 	** Returns the environment in abbreviated form; 'dev, test, prod'. Or just the env in lowercase if not recognised.
 	abstract Str abbr()
 		
-	** Create an 'IocEnv' with the given (optional) environment override.  
-	static IocEnv fromStr(Str? environment := null) {
-		IocEnvImpl() { it.overRIDE = environment }
+	** Create an 'IocEnv' with the given (optional) environment override. This may be invoked via the ctor syntax: 
+	** 
+	**   iocEnv := IocEnv("prod")
+	static new fromStr(Str? environmentOverride := null) {
+		IocEnvImpl(environmentOverride)
 	}
 }
 
@@ -41,16 +52,18 @@ internal const class IocEnvImpl : IocEnv {
 			const Str?	overRIDE
 
 	
-	new make(|This|? f := null) {
+	new make(Str? overRIDE, |This|? f := null) {
 		debug	:= [,]
 		
-		f?.call(this)	// use to set override
-		this.env	= findEnv(debug, Env.cur.vars, Env.cur.args, overRIDE)
+		this.overRIDE	= overRIDE
+		this.env		= findEnv(debug, Env.cur.vars, Env.cur.args, overRIDE)
+		this.debug		= debug
+		this.isProd		= "production" .equalsIgnoreCase(env) || "prod".equalsIgnoreCase(env)
+		this.isTest		= "testing"    .equalsIgnoreCase(env) || "test".equalsIgnoreCase(env)
+		this.isDev		= "development".equalsIgnoreCase(env) || "dev" .equalsIgnoreCase(env)
 		
-		this.debug	= debug
-		this.isProd	= "production" .equalsIgnoreCase(env) || "prod".equalsIgnoreCase(env)
-		this.isTest	= "testing"    .equalsIgnoreCase(env) || "test".equalsIgnoreCase(env)
-		this.isDev	= "development".equalsIgnoreCase(env) || "dev" .equalsIgnoreCase(env)
+		// not currently use for anything - but it's a nice get out of jail card
+		f?.call(this)
 	}
 
 	override Bool isEnv(Str env) {
