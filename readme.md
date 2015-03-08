@@ -57,7 +57,7 @@ class Example {
 
 class Main {
     Void main() {
-        registry := RegistryBuilder().addModulesFromPod(Pod.find("afIocEnv")).addModule(AppModule#).build.startup
+        registry := RegistryBuilder().addModulesFromPod("afIocEnv").addModule(AppModule#).build.startup
         example  := (Example) registry.dependencyByType(Example#)
         example.wotever()
     }
@@ -143,10 +143,9 @@ using afIocEnv
 
 class AppModule {
 
-    @Override
-    static IocEnv overrideIocEnv() {
-        IocEnv.fromStr("MoFo")
-    }
+	static Void defineServices(ServiceDefinitions defs) {
+		defs.overrideById(IocEnv#.qname).withCtorArgs(["MoFo"])
+	}
     ....
 }
 ```
