@@ -1,10 +1,16 @@
-## Overview 
+#IoC Env v1.0.16
+---
+[![Written in: Fantom](http://img.shields.io/badge/written%20in-Fantom-lightgray.svg)](http://fantom.org/)
+[![pod: v1.0.16](http://img.shields.io/badge/pod-v1.0.16-yellow.svg)](http://www.fantomfactory.org/pods/afIocEnv)
+![Licence: MIT](http://img.shields.io/badge/licence-MIT-blue.svg)
+
+## Overview
 
 `Ioc Env` is a library for determining the application environment, be it *development*, *test* or *production*.
 
 It sniffs environment variables and program arguments, and offers a manual override option - useful for testing.
 
-## Install 
+## Install
 
 Install `IoC Env` with the Fantom Repository Manager ( [fanr](http://fantom.org/doc/docFanr/Tool.html#install) ):
 
@@ -14,11 +20,11 @@ To use in a [Fantom](http://fantom.org/) project, add a dependency to `build.fan
 
     depends = ["sys 1.0", ..., "afIocEnv 1.0+"]
 
-## Documentation 
+## Documentation
 
 Full API & fandocs are available on the [Status302 repository](http://repo.status302.com/doc/afIocEnv/).
 
-## Quick Start 
+## Quick Start
 
 **Example.fan**:
 
@@ -74,7 +80,7 @@ The environment is 'PRODUCTION'
 I'm in Production!
 ```
 
-## Usage - IocEnv Injection 
+## Usage - IocEnv Injection
 
 The [IocEnv](http://repo.status302.com/doc/afIocEnv/IocEnv.html) class is the main [IoC](http://www.fantomfactory.org/pods/afIoc) service with handy utility methods. Inject it as usual:
 
@@ -93,7 +99,7 @@ Void wotever() {
 }
 ```
 
-## Usage - Config Injection 
+## Usage - Config Injection
 
 You can also inject [IoC Config](http://www.fantomfactory.org/pods/afIocConfig) values. See [IocEnvConfigIds](http://repo.status302.com/doc/afIocEnv/IocEnvConfigIds.html) for a complete list of injectable values:
 
@@ -113,7 +119,7 @@ Void wotever() {
 }
 ```
 
-## Setting the Environment 
+## Setting the Environment
 
 To determine your environment, `IoC Env` checks the following:
 
@@ -127,7 +133,7 @@ Note if no environment setting is found, it defaults to `Production`. This is be
 
 > **ALIEN-AID:** Because the environment default is `production` you need to set the environment on your dev machine. The easiest way to do this is to set a new environment variable called `ENV` to the value `dev`.
 
-## Overriding the Environment 
+## Overriding the Environment
 
 Should you need to programmatically override the environment, do it by overriding the [IocEnv](http://repo.status302.com/doc/afIocEnv/IocEnv.html) service in your `AppModule`:
 
