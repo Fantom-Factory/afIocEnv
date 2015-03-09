@@ -8,9 +8,9 @@ using afIocConfig::FactoryDefaults
 const class IocEnvModule {
 
 	internal static Void defineServices(ServiceDefinitions defs) {
-		defs.add(IocEnv#)
+		defs.add(IocEnv#).withCtorArgs([null])
 	}
-	
+
 	@Contribute { serviceType=FactoryDefaults# }
 	internal static Void contributeApplicationDefaults(Configuration config, IocEnv iocEnv) {
 		config[IocEnvConfigIds.env]		= iocEnv.env
