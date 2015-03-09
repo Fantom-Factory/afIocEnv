@@ -1,4 +1,5 @@
 using afIoc
+using afIocConfig
 
 internal class TestIocEnv : Test {
 
@@ -43,8 +44,14 @@ internal class TestIocEnv : Test {
 		verifyEq(env, "Ice")
 	}
 
+	Void testIocNormal() {
+		reg := RegistryBuilder().addModules([IocEnvModule#, ConfigModule#]).build.startup
+		iocEnv := (IocEnv) reg.dependencyByType(IocEnv#)
+		// no verifies - we're just testing there are no errors
+	}
+
 	Void testIocOverride() {
-		reg := RegistryBuilder().addModule(T_AppModule#).build.startup
+		reg := RegistryBuilder().addModules([IocEnvModule#, ConfigModule#, T_AppModule#]).build.startup
 
 		iocEnv := (IocEnv) reg.dependencyByType(IocEnv#)
 		
@@ -54,7 +61,6 @@ internal class TestIocEnv : Test {
 
 internal class T_AppModule {
 	static Void defineServices(ServiceDefinitions defs) {
-		defs.add(IocEnv#)
 		defs.overrideById(IocEnv#.qname).withCtorArgs(["MoFo"])
 	}
 }
