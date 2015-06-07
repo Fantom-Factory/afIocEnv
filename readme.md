@@ -6,7 +6,7 @@
 
 ## Overview
 
-`Ioc Env` is a library for determining the application environment, be it *development*, *test* or *production*.
+IoC Env is a library for determining the application environment, be it *development*, *test* or *production*.
 
 It sniffs environment variables and program arguments, and offers a manual override option - useful for testing.
 
@@ -18,71 +18,72 @@ Install `IoC Env` with the Fantom Repository Manager ( [fanr](http://fantom.org/
 
 To use in a [Fantom](http://fantom.org/) project, add a dependency to `build.fan`:
 
-    depends = ["sys 1.0", ..., "afIocEnv 1.0+"]
+    depends = ["sys 1.0", ..., "afIocEnv 1.0"]
 
 ## Documentation
 
-Full API & fandocs are available on the [Status302 repository](http://repo.status302.com/doc/afIocEnv/).
+Full API & fandocs are available on the [Fantom Pod Repository](http://pods.fantomfactory.org/pods/afIocEnv/).
 
 ## Quick Start
 
-**Example.fan**:
+1. Create a text file called `Example.fan`
 
-```
-using afIoc
-using afIocConfig
-using afIocEnv
-
-class Example {
-    @Inject
-    IocEnv iocEnv                     // --> Inject IocEnv service
-
-    @Config { id="afIocEnv.isProd" }  // --> Inject Config values
-    Bool isProd
-
-    new make(|This| in) { in(this) }
-
-    Void wotever() {
-        echo("The environment is '${iocEnv.env}'")
-
-        if (isProd) {
-            echo("I'm in Production!")
-        } else {
-            echo("I'm in Development!!")
+        using afIoc
+        using afIocConfig
+        using afIocEnv
+        
+        class Example {
+            @Inject
+            IocEnv iocEnv                     // --> Inject IocEnv service
+        
+            @Config { id="afIocEnv.isProd" }  // --> Inject Config values
+            Bool isProd
+        
+            new make(|This| in) { in(this) }
+        
+            Void wotever() {
+                echo("The environment is '${iocEnv.env}'")
+        
+                if (isProd) {
+                    echo("I'm in Production!")
+                } else {
+                    echo("I'm in Development!!")
+                }
+            }
         }
-    }
-}
+        
+        // ---- Standard IoC Support Classes ----
+        
+        class Main {
+            Void main() {
+                registry := RegistryBuilder().addModulesFromPod("afIocEnv").addModule(AppModule#).build.startup
+                example  := (Example) registry.dependencyByType(Example#)
+                example.wotever()
+            }
+        }
+        
+        class AppModule {
+            static Void defineServices(ServiceDefinitions defs) {
+                defs.add(Example#)
+            }
+        }
 
-// ---- Standard IoC Support Classes ----
 
-class Main {
-    Void main() {
-        registry := RegistryBuilder().addModulesFromPod("afIocEnv").addModule(AppModule#).build.startup
-        example  := (Example) registry.dependencyByType(Example#)
-        example.wotever()
-    }
-}
+2. Run `Example.fan` as a Fantom script from the command line:
 
-class AppModule {
-    static Void defineServices(ServiceDefinitions defs) {
-        defs.add(Example#)
-    }
-}
-```
+        C:\> fan Example.fan -env PRODUCTION
+        [info] [afIocEnv] Setting from environment variable 'env' : development
+        [info] [afIocEnv] Overriding from cmd line argument '-env' : PRODUCTION
+        The environment is 'PRODUCTION'
+        I'm in Production!
 
-Run the **Example.fan** script from the command line:
 
-```
-C:\> fan Example.fan -env PRODUCTION
-[info] [afIocEnv] Setting from environment variable 'env' : development
-[info] [afIocEnv] Overriding from cmd line argument '-env' : PRODUCTION
-The environment is 'PRODUCTION'
-I'm in Production!
-```
 
-## Usage - IocEnv Injection
+## Usage
 
-The [IocEnv](http://repo.status302.com/doc/afIocEnv/IocEnv.html) class is the main [IoC](http://www.fantomfactory.org/pods/afIoc) service with handy utility methods. Inject it as usual:
+### IocEnv Injection
+
+The [IocEnv](http://pods.fantomfactory.org/pods/afIocEnv/api/IocEnv) class is the main [IoC](http://pods.fantomfactory.org/pods/afIoc) service with handy utility methods. Inject it as usual:
 
 ```
 using afIoc::Inject
@@ -99,9 +100,9 @@ Void wotever() {
 }
 ```
 
-## Usage - Config Injection
+### Config Injection
 
-You can also inject [IoC Config](http://www.fantomfactory.org/pods/afIocConfig) values. See [IocEnvConfigIds](http://repo.status302.com/doc/afIocEnv/IocEnvConfigIds.html) for a complete list of injectable values:
+You can also inject [IoC Config](http://pods.fantomfactory.org/pods/afIocConfig) values. See [IocEnvConfigIds](http://pods.fantomfactory.org/pods/afIocEnv/api/IocEnvConfigIds) for a complete list of injectable values:
 
 ```
 using afIoc::Inject
@@ -125,7 +126,7 @@ To determine your environment, `IoC Env` checks the following:
 
 - **Environment Variables** - if an environment variable named `env` or `environment` if found, it is taken to be your environment.
 - **Program Arguments** - if an option labelled `-env` or `-environment` if found, the environment is taken to be the argument following. Example, `-env prod`. This convention follows [@Opt](http://fantom.org/doc/util/Opt.html) from [util::AbstractMain](http://fantom.org/doc/util/AbstractMain.html).
-- **Manual Override** - the environment may be set / overridden when the [IocEnv](http://repo.status302.com/doc/afIocEnv/IocEnv.html) instance is created.
+- **Manual Override** - the environment may be set / overridden when the [IocEnv](http://pods.fantomfactory.org/pods/afIocEnv/api/IocEnv) instance is created.
 
 The ordering of checks mean program arguments override environment variables and a manual override trumps everything.
 
@@ -135,7 +136,7 @@ Note if no environment setting is found, it defaults to `Production`. This is be
 
 ## Overriding the Environment
 
-Should you need to programmatically override the environment, do it by overriding the [IocEnv](http://repo.status302.com/doc/afIocEnv/IocEnv.html) service in your `AppModule`:
+Should you need to programmatically override the environment, do it by overriding the [IocEnv](http://pods.fantomfactory.org/pods/afIocEnv/api/IocEnv) service in your `AppModule`:
 
 ```
 using afIoc
@@ -143,9 +144,9 @@ using afIocEnv
 
 class AppModule {
 
-	static Void defineServices(ServiceDefinitions defs) {
-		defs.overrideById(IocEnv#.qname).withCtorArgs(["MoFo"])
-	}
+    static Void defineServices(ServiceDefinitions defs) {
+        defs.overrideById(IocEnv#.qname).withCtorArgs(["MoFo"])
+    }
     ....
 }
 ```

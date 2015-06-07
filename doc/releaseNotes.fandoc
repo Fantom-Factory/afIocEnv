@@ -1,0 +1,43 @@
+Versions
+********
+
+v1.0.18
+=======
+ - Bug: 'IocEnvModule' incorrectly defined the 'IocEnv' service.
+
+v1.0.16
+=======
+ - Chg: 'IocEnv.fromStr()' may now take a nullable environment override.
+
+v1.0.14
+=======
+ - Chg: Updated to use [IoC 2.0.0]`pod:afIoc` and [IoC Config 1.0.16]`pod:afIocConfig`
+
+v1.0.12
+=======
+ - Chg: Updated to use [IoC 1.7.6]`pod:afIoc` and [IoC Config 1.0.14]`pod:afIocConfig`
+
+v1.0.10
+=======
+ - Bug: Bodged release - updated to [IoC 1.7.2]`pod:afIoc`.
+
+v1.0.8
+======
+ - Chg: Updated to use [IoC 1.7.0]`pod:afIoc`.
+
+v1.0.6
+======
+ - Chg: Updated to use [IoC 1.6.4]`pod:afIoc` - removed dependencies on deprecated methods.
+
+v1.0.4
+======
+ - Chg: Updated to use [IoC 1.6.0]`pod:afIoc`
+
+v1.0.2
+======
+ - New: Added 'IocEnv.abbr()'
+
+v1.0.0
+======
+ - New: Initial Release
+
