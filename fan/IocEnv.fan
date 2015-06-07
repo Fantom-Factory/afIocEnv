@@ -3,10 +3,12 @@
 ** 
 ** Although a 'mixin', implementations may still be made with the following code:
 ** 
+**   syntax: fantom
 **   iocEnv := IocEnv()
 ** 
 ** Or pass in an override with: 
 ** 
+**   syntax: fantom
 **   iocEnv := IocEnv("prod")
 ** 
 const mixin IocEnv {

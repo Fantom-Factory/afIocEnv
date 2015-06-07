@@ -1,7 +1,7 @@
 using afIoc
 using afIocConfig::FactoryDefaults
 
-** The [afIoc]`http://repo.status302.com/doc/afIoc/#overview` module class.
+** The [IoC]`pod:afIoc` module class.
 ** 
 ** This class is public so it may be referenced explicitly in test code.
 @NoDoc

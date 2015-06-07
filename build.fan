@@ -5,13 +5,13 @@ class Build : BuildPod {
 	new make() {
 		podName = "afIocEnv"
 		summary = "A library for determining the application environment; dev, test or prod"
-		version = Version("1.0.19")
+		version = Version("1.0.18")
 
 		meta = [
 			"proj.name"		: "IoC Env",
 			"afIoc.module"	: "afIocEnv::IocEnvModule",
-			"tags"			: "system",
-			"repo.private"	: "true"
+			"repo.tags"		: "system",
+			"repo.public"	: "true"
 		]
 
 		index = [	
@@ -26,6 +26,6 @@ class Build : BuildPod {
 		]
 
 		srcDirs = [`test/`, `fan/`]
-		resDirs = [,]
+		resDirs = [`doc/`]
 	}
 }
