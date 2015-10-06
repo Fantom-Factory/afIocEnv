@@ -14,7 +14,7 @@ It sniffs environment variables and program arguments, and offers a manual overr
 
 Install `IoC Env` with the Fantom Repository Manager ( [fanr](http://fantom.org/doc/docFanr/Tool.html#install) ):
 
-    C:\> fanr install -r http://repo.status302.com/fanr/ afIocEnv
+    C:\> fanr install -r http://pods.fantomfactory.org/fanr/ afIocEnv
 
 To use in a [Fantom](http://fantom.org/) project, add a dependency to `build.fan`:
 
@@ -32,16 +32,16 @@ Full API & fandocs are available on the [Fantom Pod Repository](http://pods.fant
         using afIocConfig
         using afIocEnv
         
-        class Example {
-            @Inject
-            IocEnv iocEnv                     // --> Inject IocEnv service
+        const class Example {
+            @Inject                           // --> Inject IocEnv service
+            const IocEnv iocEnv
         
             @Config { id="afIocEnv.isProd" }  // --> Inject Config values
-            Bool isProd
+            const Bool isProd
         
             new make(|This| in) { in(this) }
         
-            Void wotever() {
+            Void print() {
                 echo("The environment is '${iocEnv.env}'")
         
                 if (isProd) {
@@ -56,15 +56,13 @@ Full API & fandocs are available on the [Fantom Pod Repository](http://pods.fant
         
         class Main {
             Void main() {
-                registry := RegistryBuilder().addModulesFromPod("afIocEnv").addModule(AppModule#).build.startup
-                example  := (Example) registry.dependencyByType(Example#)
-                example.wotever()
-            }
-        }
+                registry := RegistryBuilder() {
+                    addModulesFromPod("afIocEnv")
+                    addService(Example#)
+                }.build()
         
-        class AppModule {
-            static Void defineServices(ServiceDefinitions defs) {
-                defs.add(Example#)
+                example  := (Example) registry.dependencyByType(Example#)
+                example.print()
             }
         }
 
@@ -83,7 +81,7 @@ Full API & fandocs are available on the [Fantom Pod Repository](http://pods.fant
 
 ### IocEnv Injection
 
-The [IocEnv](http://pods.fantomfactory.org/pods/afIocEnv/api/IocEnv) class is the main [IoC](http://pods.fantomfactory.org/pods/afIoc) service with handy utility methods. Inject it as usual:
+The [IocEnv](http://pods.fantomfactory.org/pods/afIocEnv/api/IocEnv) class is the main IoC service with handy utility methods. Inject it as usual:
 
 ```
 using afIoc::Inject
@@ -142,10 +140,10 @@ Should you need to programmatically override the environment, do it by overridin
 using afIoc
 using afIocEnv
 
-class AppModule {
+const class AppModule {
 
-    static Void defineServices(ServiceDefinitions defs) {
-        defs.overrideById(IocEnv#.qname).withCtorArgs(["MoFo"])
+    Void defineServices(RegistryBuilder defs) {
+        defs.overrideService(IocEnv#.qname).withCtorArgs(["MoFo"])
     }
     ....
 }

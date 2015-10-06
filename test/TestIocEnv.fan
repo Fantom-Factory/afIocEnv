@@ -45,22 +45,22 @@ internal class TestIocEnv : Test {
 	}
 
 	Void testIocNormal() {
-		reg := RegistryBuilder().addModules([IocEnvModule#, ConfigModule#]).build.startup
-		iocEnv := (IocEnv) reg.dependencyByType(IocEnv#)
+		reg := RegistryBuilder().addModules([IocEnvModule#, IocConfigModule#]).build
+		iocEnv := (IocEnv) reg.rootScope.serviceByType(IocEnv#)
 		// no verifies - we're just testing there are no errors
 	}
 
 	Void testIocOverride() {
-		reg := RegistryBuilder().addModules([IocEnvModule#, ConfigModule#, T_AppModule#]).build.startup
+		reg := RegistryBuilder().addModules([IocEnvModule#, IocConfigModule#, T_AppModule#]).build
 
-		iocEnv := (IocEnv) reg.dependencyByType(IocEnv#)
+		iocEnv := (IocEnv) reg.rootScope.serviceByType(IocEnv#)
 		
 		verifyEq(iocEnv.env, "MoFo")
 	}
 }
 
-internal class T_AppModule {
-	static Void defineServices(ServiceDefinitions defs) {
-		defs.overrideById(IocEnv#.qname).withCtorArgs(["MoFo"])
+internal const class T_AppModule {
+	static Void defineServices(RegistryBuilder defs) {
+		defs.overrideService(IocEnv#.qname).withCtorArgs(["MoFo"])
 	}
 }
