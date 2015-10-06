@@ -7,21 +7,20 @@ using afIocConfig::FactoryDefaults
 @NoDoc
 const class IocEnvModule {
 
-	internal static Void defineServices(ServiceDefinitions defs) {
-		defs.add(IocEnv#).withCtorArgs([null])
+	static Void defineServices(RegistryBuilder defs) {
+		defs.addService(IocEnv#).withRootScope.withCtorArgs([null])
 	}
 
 	@Contribute { serviceType=FactoryDefaults# }
-	internal static Void contributeApplicationDefaults(Configuration config, IocEnv iocEnv) {
+	static Void contributeApplicationDefaults(Configuration config, IocEnv iocEnv) {
 		config[IocEnvConfigIds.env]		= iocEnv.env
 		config[IocEnvConfigIds.isProd]	= iocEnv.isProd
 		config[IocEnvConfigIds.isTest]	= iocEnv.isTest
 		config[IocEnvConfigIds.isDev]	= iocEnv.isDev
 	}
 
-	@Contribute { serviceType=RegistryStartup# }
-	internal static Void contributeRegistryStartup(Configuration conf, IocEnv iocEnv) {
-		conf["afIocEnv.logEnv"] = |->| {
+	static Void onRegistryStartup(Configuration config, IocEnv iocEnv) {
+		config["afIocEnv.logEnv"] = |->| {
 			iocEnv.logToInfo
 		}
 	}

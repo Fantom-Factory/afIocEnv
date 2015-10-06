@@ -1,6 +1,10 @@
 Versions
 ********
 
+v1.1.0
+======
+ - Chg: Updated to work with [IoC v3]`pod:afIoc`.
+
 v1.0.18
 =======
  - Bug: 'IocEnvModule' incorrectly defined the 'IocEnv' service.
