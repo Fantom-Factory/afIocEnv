@@ -20,6 +20,9 @@ const mixin IocEnv {
 	abstract Bool isProd()
 
 	** Returns 'true' if the environment is 'test' or 'testing'.
+	abstract Bool isStage()
+	
+	** Returns 'true' if the environment is 'test' or 'testing'.
 	abstract Bool isTest()
 	
 	** Returns 'true' if the environment is 'dev' or 'development'.
@@ -47,6 +50,7 @@ internal const class IocEnvImpl : IocEnv {
 
 	override const Str	env
 	override const Bool	isProd
+	override const Bool	isStage
 	override const Bool	isTest
 	override const Bool	isDev
 
@@ -60,9 +64,10 @@ internal const class IocEnvImpl : IocEnv {
 		this.overRIDE	= overRIDE
 		this.env		= findEnv(debug, Env.cur.vars, Env.cur.args, overRIDE)
 		this.debug		= debug
-		this.isProd		= "production" .equalsIgnoreCase(env) || "prod".equalsIgnoreCase(env)
-		this.isTest		= "testing"    .equalsIgnoreCase(env) || "test".equalsIgnoreCase(env)
-		this.isDev		= "development".equalsIgnoreCase(env) || "dev" .equalsIgnoreCase(env)
+		this.isProd		= "production"	.equalsIgnoreCase(env) || "prod" .equalsIgnoreCase(env)
+		this.isProd		= "staging"		.equalsIgnoreCase(env) || "stage".equalsIgnoreCase(env)
+		this.isTest		= "testing"		.equalsIgnoreCase(env) || "test" .equalsIgnoreCase(env)
+		this.isDev		= "development"	.equalsIgnoreCase(env) || "dev"  .equalsIgnoreCase(env)
 		
 		// not currently use for anything - but it's a nice get out of jail card
 		f?.call(this)
@@ -77,9 +82,10 @@ internal const class IocEnvImpl : IocEnv {
 	}
 
 	override Str abbr() {
-		if (isProd)	return "prod"
-		if (isTest)	return "test"
-		if (isDev)	return "dev"
+		if (isProd)		return "prod"
+		if (isStage)	return "stage"
+		if (isTest)		return "test"
+		if (isDev)		return "dev"
 		return env.lower
 	}
 

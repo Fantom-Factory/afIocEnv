@@ -8,6 +8,9 @@ const mixin IocEnvConfigIds {
 	** Returns 'true' if environment is 'prod', 'production' or *undefined*.
 	static const Str	isProd	:= "afIocEnv.isProd"
 
+	** Returns 'true' if environment is 'stage' or 'staging'.
+	static const Str	isStage	:= "afIocEnv.isStage"
+
 	** Returns 'true' if environment is 'test' or 'testing'.
 	static const Str	isTest	:= "afIocEnv.isTest"
 
