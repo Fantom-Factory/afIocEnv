@@ -1,7 +1,7 @@
-#IoC Env v1.0.18
+#IoC Env v1.1.0
 ---
 [![Written in: Fantom](http://img.shields.io/badge/written%20in-Fantom-lightgray.svg)](http://fantom.org/)
-[![pod: v1.0.18](http://img.shields.io/badge/pod-v1.0.18-yellow.svg)](http://www.fantomfactory.org/pods/afIocEnv)
+[![pod: v1.1.0](http://img.shields.io/badge/pod-v1.1.0-yellow.svg)](http://www.fantomfactory.org/pods/afIocEnv)
 ![Licence: MIT](http://img.shields.io/badge/licence-MIT-blue.svg)
 
 ## Overview
@@ -18,7 +18,7 @@ Install `IoC Env` with the Fantom Repository Manager ( [fanr](http://fantom.org/
 
 To use in a [Fantom](http://fantom.org/) project, add a dependency to `build.fan`:
 
-    depends = ["sys 1.0", ..., "afIocEnv 1.0"]
+    depends = ["sys 1.0", ..., "afIocEnv 1.1"]
 
 ## Documentation
 

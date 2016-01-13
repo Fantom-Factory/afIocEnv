@@ -15,6 +15,7 @@ const class IocEnvModule {
 	static Void contributeApplicationDefaults(Configuration config, IocEnv iocEnv) {
 		config[IocEnvConfigIds.env]		= iocEnv.env
 		config[IocEnvConfigIds.isProd]	= iocEnv.isProd
+		config[IocEnvConfigIds.isStage]	= iocEnv.isStage
 		config[IocEnvConfigIds.isTest]	= iocEnv.isTest
 		config[IocEnvConfigIds.isDev]	= iocEnv.isDev
 	}
