@@ -3,7 +3,8 @@ Versions
 
 v1.1.0
 ======
- - Chg: Updated to work with [IoC v3]`pod:afIoc`.
+ - New: Added new 'stage' environment.
+ - Chg: Updated to work with [IoC 3.0]`pod:afIoc`.
 
 v1.0.18
 =======
