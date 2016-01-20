@@ -65,7 +65,7 @@ internal const class IocEnvImpl : IocEnv {
 		this.env		= findEnv(debug, Env.cur.vars, Env.cur.args, overRIDE)
 		this.debug		= debug
 		this.isProd		= "production"	.equalsIgnoreCase(env) || "prod" .equalsIgnoreCase(env)
-		this.isProd		= "staging"		.equalsIgnoreCase(env) || "stage".equalsIgnoreCase(env)
+		this.isStage	= "staging"		.equalsIgnoreCase(env) || "stage".equalsIgnoreCase(env)
 		this.isTest		= "testing"		.equalsIgnoreCase(env) || "test" .equalsIgnoreCase(env)
 		this.isDev		= "development"	.equalsIgnoreCase(env) || "dev"  .equalsIgnoreCase(env)
 		
