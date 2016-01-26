@@ -18,6 +18,10 @@ const class IocEnvModule {
 		config[IocEnvConfigIds.isStage]	= iocEnv.isStage
 		config[IocEnvConfigIds.isTest]	= iocEnv.isTest
 		config[IocEnvConfigIds.isDev]	= iocEnv.isDev
+
+		// set the environment in IoC Config
+		config["afIocConfig.env"]		= iocEnv.abbr
+		config["afIocConfig.envs"]		= "dev, test, stage, prod"
 	}
 
 	static Void onRegistryStartup(Configuration config, IocEnv iocEnv) {
