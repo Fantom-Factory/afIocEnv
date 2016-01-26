@@ -1,16 +1,17 @@
 
-** (Service) - Holds the 'environment' with some hand utility methods.
+** (Service) - Holds the 'environment' with some handy utility methods.
 ** 
-** Although a 'mixin', implementations may still be made with the following code:
+** Although a 'mixin', implementations may still be created with the following:
 ** 
 **   syntax: fantom
 **   iocEnv := IocEnv()
 ** 
-** Or pass in an override with: 
+** Or pass in an override:
 ** 
 **   syntax: fantom
 **   iocEnv := IocEnv("prod")
 ** 
+@Js
 const mixin IocEnv {
 	
 	** Returns the environment Str.
@@ -45,6 +46,7 @@ const mixin IocEnv {
 	}
 }
 
+@Js
 internal const class IocEnvImpl : IocEnv {
 	private static const Log log	:= IocEnv#.pod.log
 
