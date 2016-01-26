@@ -1,5 +1,6 @@
 
 ** 'IoC Config' values as provided by 'IoC Env'.
+@Js
 const mixin IocEnvConfigIds {
 	
 	** Returns the environment Str.

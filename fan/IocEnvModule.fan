@@ -4,7 +4,7 @@ using afIocConfig::FactoryDefaults
 ** The [IoC]`pod:afIoc` module class.
 ** 
 ** This class is public so it may be referenced explicitly in test code.
-@NoDoc
+@Js @NoDoc
 const class IocEnvModule {
 
 	static Void defineServices(RegistryBuilder defs) {

@@ -1,6 +1,7 @@
 using afIoc
 using afIocConfig
 
+@Js
 internal class TestIocEnv : Test {
 
 	Void testDefaultsToProd() {
@@ -59,6 +60,7 @@ internal class TestIocEnv : Test {
 	}
 }
 
+@Js
 internal const class T_AppModule {
 	static Void defineServices(RegistryBuilder defs) {
 		defs.overrideService(IocEnv#.qname).withCtorArgs(["MoFo"])
