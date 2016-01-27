@@ -5,6 +5,7 @@ v1.1.0
 ======
  - New: Now available in Javascript!
  - New: Added new 'stage' environment.
+ - New: Env is also read from 'config.props'.
  - New: Contributes the env to Ioc Config, enabling env overrides.
  - Chg: Updated to work with [IoC 3.0]`pod:afIoc` and [IocConfig 1.1]`pod:afIocConfig`.
 

@@ -64,7 +64,7 @@ internal const class IocEnvImpl : IocEnv {
 		debug	:= [,]
 		
 		this.overRIDE	= overRIDE
-		this.env		= findEnv(debug, Env.cur.vars, Env.cur.args, overRIDE)
+		this.env		= findEnv(debug, Env.cur.vars, `config.props`.toFile, Env.cur.args, overRIDE)
 		this.debug		= debug
 		this.isProd		= "production"	.equalsIgnoreCase(env) || "prod" .equalsIgnoreCase(env)
 		this.isStage	= "staging"		.equalsIgnoreCase(env) || "stage".equalsIgnoreCase(env)
@@ -95,7 +95,7 @@ internal const class IocEnvImpl : IocEnv {
 		env
 	}
 	
-	static Str findEnv(Str[] debug, Str:Str vars, Str[] args, Str?	overRIDE) {
+	static Str findEnv(Str[] debug, Str:Str vars, File? config, Str[] args, Str? overRIDE) {
 		env		:= (Str?) null
 		
 		if (vars.containsKey("env")) {
@@ -106,6 +106,23 @@ internal const class IocEnvImpl : IocEnv {
 		if (vars.containsKey("environment")) {
 			env = vars["environment"]
 			addDebug(debug, "environment variable", "environment", env)
+		}
+		
+		if (config != null && config.exists) {
+			try {
+				configProps := Str:Str[:] { it.caseInsensitive = true }.addAll(config.readProps)
+
+				if (configProps.containsKey("env")) {
+					env = configProps["env"]
+					addDebug(debug, config.name, "env", env)
+				}
+
+				if (configProps.containsKey("environment")) {
+					env = configProps["environment"]
+					addDebug(debug, config.name, "environment", env)
+				}
+			} catch (Err err)
+				log.warn(err.msg)
 		}
 
 		if (args.contains("-env")) {
