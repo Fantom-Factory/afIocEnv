@@ -7,12 +7,16 @@ using afIocConfig::FactoryDefaults
 @Js @NoDoc
 const class IocEnvModule {
 
+	**
+	** Note: Any change to this class should be reflected in BedSheet::IocEnvModule
+	** 
+	
 	static Void defineServices(RegistryBuilder defs) {
 		defs.addService(IocEnv#).withRootScope.withCtorArgs([null])
 	}
 
 	@Contribute { serviceType=FactoryDefaults# }
-	static Void contributeApplicationDefaults(Configuration config, IocEnv iocEnv) {
+	static Void contributeFactoryDefaults(Configuration config, IocEnv iocEnv) {
 		config[IocEnvConfigIds.env]		= iocEnv.env
 		config[IocEnvConfigIds.isProd]	= iocEnv.isProd
 		config[IocEnvConfigIds.isStage]	= iocEnv.isStage
