@@ -5,13 +5,13 @@ class Build : BuildPod {
 	new make() {
 		podName = "afIocEnv"
 		summary = "A library for determining the application environment; dev, test, stage, or prod"
-		version = Version("1.1.0")
+		version = Version("1.1.1")
 
 		meta = [
 			"proj.name"		: "IoC Env",
 			"afIoc.module"	: "afIocEnv::IocEnvModule",
 			"repo.tags"		: "system",
-			"repo.public"	: "true"
+			"repo.public"	: "false"
 		]
 
 		index = [	
