@@ -13,19 +13,19 @@ Quick Start
     syntax: fantom
 
     using afIoc
-    using afIocConfig
     using afIocEnv
+    using afIocConfig
 
     const class Example {
-        @Inject                           // --> Inject IocEnv service
-        const IocEnv iocEnv
+        @Inject
+        const IocEnv iocEnv               // --> Inject IocEnv service
 
         @Config { id="afIocEnv.isProd" }  // --> Inject Config values
         const Bool isProd
 
         new make(|This| in) { in(this) }
 
-        Void print() {
+        Void printEnv() {
             echo("The environment is '${iocEnv.env}'")
 
             if (isProd) {
@@ -36,7 +36,7 @@ Quick Start
         }
     }
 
-    // ---- Standard IoC Support Classes ----
+    // ---- Standard afIoc Support Classes ----
 
     class Main {
         Void main() {
@@ -45,12 +45,10 @@ Quick Start
                 addService(Example#)
             }.build()
 
-            example  := (Example) registry.dependencyByType(Example#)
-            example.print()
+            example  := (Example) registry.rootScope.serviceByType(Example#)
+            example.printEnv()
         }
     }
-
-
 
 2. Run 'Example.fan' as a Fantom script from the command line:
 
